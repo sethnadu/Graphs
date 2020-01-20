@@ -116,7 +116,9 @@ class Graph:
         stack.push([starting_vertex])
         while stack.size() > 0:
             path = stack.pop()
+            print("path", path)
             v = path[-1]
+            print("v -1", v)
             if v not in visited:
                 if v is destination_vertex:
                     return path
@@ -126,7 +128,7 @@ class Graph:
                     shortest_path.append(next_v)
                     stack.push(shortest_path)
 
-    def dfs_recursive(self, starting_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited = set()):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -134,6 +136,19 @@ class Graph:
 
         This should be done using recursion.
         """
+        for i in self.vertices[starting_vertex]:
+            if destination_vertex in self.vertices[i]:
+                visited.add(starting_vertex)
+                visited.add(i)
+                visited.add(destination_vertex)
+                return list(visited)
+        for i in self.vertices[starting_vertex]:
+            if i not in visited:
+                visited.add(starting_vertex)
+                self.dfs_recursive(i, destination_vertex)
+        return list(visited)
+            
+
     
 
 if __name__ == '__main__':
@@ -162,6 +177,7 @@ if __name__ == '__main__':
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
     print(graph.vertices)
+
     print("get neighbors", graph.get_neighbors(4))
 
     '''
@@ -190,6 +206,7 @@ if __name__ == '__main__':
     '''
     graph.dft(1)
     graph.dft_recursive(1)
+    
 
     '''
     Valid BFS path:
