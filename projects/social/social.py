@@ -52,7 +52,7 @@ class SocialGraph:
             return
         # Add users
         for i in range(num_users):
-            self.add_user(i)
+            self.add_user(i + 1)
 
         # Create friendships
         # Total friends is average times num_users
@@ -107,5 +107,7 @@ if __name__ == '__main__':
     sg = SocialGraph()
     sg.populate_graph(10, 2)
     print(sg.friendships)
+    for i in range(len(sg.users)):
+        print(sg.users[i + 1].name)
     connections = sg.get_all_social_paths(1)
     print(connections)
