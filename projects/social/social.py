@@ -69,7 +69,7 @@ class SocialGraph:
             if random_user < random_friend:
                 # If check to make sure user-friend relationship doesn't already exist
                 if random_friend not in self.friendships[random_user] or random_user not in self.friendships[random_friend]:
-                    if len(self.friendships[random_user]) <= max_friend_user:
+                    if len(self.friendships[random_user]) < max_friend_user and len(self.friendships[random_friend]) < max_friend_user:
                         self.add_friendship(random_user, random_friend)
                         # Add 2 to friend count as a mutual two-way relationship between user and friend
                         friend_count += 2
